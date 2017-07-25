@@ -399,4 +399,15 @@ console.log(foo.prop);
 	set.forEach(function (value, key) {
 		console.log(value * 2);
 	});
+	// 数组的map 和 filter
+	var set2 = new Set([1, 2, 3]);
+	set2 = new Set([].concat(_toConsumableArray(set2)).map(function (x) {
+		return x * 2;
+	}));
+	console.log(set2);
+	var set3 = new Set([1, 2, 4, 6, 8]);
+	set3 = new Set([].concat(_toConsumableArray(set3)).filter(function (x) {
+		return x % 2 == 0;
+	}));
+	console.log(set3);
 }

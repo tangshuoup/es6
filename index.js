@@ -244,4 +244,11 @@ console.log(foo.prop);
 	set.forEach((value,key)=>{
 		console.log(value*2);
 	})
+	// 数组的map 和 filter
+	let set2 =new Set([1,2,3]);
+	set2 = new Set([...set2].map(x=>x*2));
+	console.log(set2);
+	let set3 =new Set([1,2,4,6,8])
+	set3 = new Set([...set3].filter(x=>(x%2)==0));
+	console.log(set3)
 }
