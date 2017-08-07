@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "babel index.js -o complied.js"
+    "build": "babel src --out-dir lib"
   },
   "author": "",
   "license": "ISC",

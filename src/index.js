@@ -251,4 +251,16 @@ console.log(foo.prop);
 	let set3 =new Set([1,2,4,6,8])
 	set3 = new Set([...set3].filter(x=>(x%2)==0));
 	console.log(set3)
+
+	let x = new Set([1,2,3]);
+	let y = new Set([4,3,2]);
+	//并集
+	let union = new Set([...x, ...y]);
+	console.log(union);//set{1,2,3,4}
+	//交集
+	let intersect = new Set([...x].filter(c => y.has(c)));
+	console.log(intersect);//set{2,3}
+	//差集
+	let difference = new Set([...x].filter(x => !y.has(x)));
+	console.log(difference);//set{1}
 }
