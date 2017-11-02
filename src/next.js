@@ -108,3 +108,42 @@
 		);
 	document.body.appendChild(el);
 }
+{
+	//Reflect
+	//1.将object对象的一些明显属于语言内部的方法放到Reflect对象上
+	//2.修改某些object方法的返回结果，让其变的更合理
+	//3.让object操作都变成函数行为。某些object操作是命令式，比如name in 
+	// obj 而Reflect.has(obj,name)让它变成了函数行为
+	//4.Reflect对象的方法与proxy对象的方法一一对应，不管proxy怎么修改
+	//默认行为，你总可以在Reflect上获取默认行为。下面是另一个例子
+	var loggerdObj = new Proxy(obj, {
+		get(target,name) {
+			console.log('get', target, name);
+			return Reflect.get(target,name);
+		},
+		deleteProperty(target,name){
+			console.log('delete' + name);
+    		return Reflect.deleteProperty(target, name);
+		},
+		 has(target, name) {
+		    console.log('has' + name);
+		    return Reflect.has(target, name);
+		  }
+	})
+	//上面代码中，每一个Pxory对象的拦截操作，内部都调用对应的Reflect,
+	//保证原生行为能够正常执行，添加的工作，就是将每一个操作输出一行日志
+	//Reflect.get(target,name,receiver)方法查找并返回target对象的name属性
+	//则返回undefined.
+
+	var myObeject = {
+		foo:1,
+		bar:2,
+		get baz() {
+			return this.foo + this.bar;
+		}
+	}
+	console.log(Reflect.get(myObeject, 'foo'));
+	console.log(Reflect.get(myObeject, 'bar'));
+	console.log(Reflect.get(myObeject, 'baz'));
+	console.log(Reflect.get(myObeject, 'fo'));
+}
